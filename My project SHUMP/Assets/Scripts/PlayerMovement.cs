@@ -9,18 +9,18 @@ public class PlayerMovement : MonoBehaviour
     //[SerializeField] public Vector2 forceToApply;
     //[SerializeField] public float forceDamping;
 
-    private Vector2 MoveDirection;
+    private Vector2 moveDirection;
 
-    public GameObject playerBulletPrefab;
-    [SerializeField] public Transform playerTransform;
-    [SerializeField] public Transform playerBulletTransform;
+    //public GameObject playerBulletPrefab;
+    //[SerializeField] public Transform playerTransform;
+    //[SerializeField] public Transform playerBulletTransform;
 
-    private float fireRate;
-    private float rightOrUp;
-    private float leftOrDown;
-    private float pbx;
-    private float pby;
-    float nextFire;
+    //private float fireRate;
+    //private float rightOrUp;
+    //private float leftOrDown;
+    //private float pbx;
+    //private float pby;
+    //float nextFire;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +36,10 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         Move();
+        //fireUpRight();
+        //fireUpLeft();
+        //fireDownRight();
+        //fireDownLeft();
     }
 
     void ProcessInputs()
@@ -43,14 +47,15 @@ public class PlayerMovement : MonoBehaviour
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
 
-        MoveDirection = new Vector2(moveX,moveY);
+        moveDirection = new Vector2(moveX,moveY);
 
     }
 
     void Move()
     {
-        rb.velocity = new Vector2(MoveDirection.x * moveSpeed, MoveDirection.y * moveSpeed);
+        rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
     }
+
 
     
 }
