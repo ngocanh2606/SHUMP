@@ -6,21 +6,9 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] public Rigidbody2D rb;
     [SerializeField] public float moveSpeed;
-    //[SerializeField] public Vector2 forceToApply;
-    //[SerializeField] public float forceDamping;
 
     private Vector2 moveDirection;
 
-    //public GameObject playerBulletPrefab;
-    //[SerializeField] public Transform playerTransform;
-    //[SerializeField] public Transform playerBulletTransform;
-
-    //private float fireRate;
-    //private float rightOrUp;
-    //private float leftOrDown;
-    //private float pbx;
-    //private float pby;
-    //float nextFire;
 
     // Start is called before the first frame update
     void Start()
@@ -36,10 +24,6 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         Move();
-        //fireUpRight();
-        //fireUpLeft();
-        //fireDownRight();
-        //fireDownLeft();
     }
 
     void ProcessInputs()

@@ -1,52 +1,33 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletMovement : MonoBehaviour
 {
-    //[SerializeField] public static float speedX;
-    //[SerializeField] public static float speedY;
-    private float moveSpeed = 2;
-    private Vector2 moveDirection;
+    public static float velX;
+    public static float velY;
 
-    [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private GameObject player;
-    // Start is called before the first frame update
+    private static Rigidbody2D rb;
+
+
+    // Use this for initialization
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        ProcessInputs();
-        if(Input.GetAxisRaw("Horizontal2") || Input.GetAxisRaw("Vertical2"))
-        {
-            GameObject bullet = Instantiate(bulletPrefab, player.tranform.position, Quaternion.identity);
-            Launch();
-        }
-    }
-
-    void FixedUpdate()
-    {
-        //Launch();
-        
-    }
-
-    void ProcessInputs()
-    {
-        float moveX = Input.GetAxisRaw("Horizontal2");
-        float moveY = Input.GetAxisRaw("Vertical2");
-
-        moveDirection = new Vector2(moveX, moveY);
+        Movement();
 
     }
 
-    void Launch()
+    void Movement()
     {
-        rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
-        
+        rb.velocity = new Vector2(velX, velY);
+
     }
 }
