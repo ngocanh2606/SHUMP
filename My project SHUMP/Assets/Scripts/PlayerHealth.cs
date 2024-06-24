@@ -16,7 +16,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Start()
     {
-        //currentLives = PlayerPrefs.GetInt("CurrentLives", startingLives); 
+        
         //UpdateLivesUI();
         //gameOverPanel.SetActive(false);
     }
@@ -36,7 +36,6 @@ public class PlayerHealth : MonoBehaviour
         playerStats.lives--;
         Debug.Log("lives after:"+ playerStats.lives);
 
-        //PlayerPrefs.SetInt("CurrentLives", currentLives);
         //UpdateLivesUI();
 
         if (playerStats.lives <= 0)
