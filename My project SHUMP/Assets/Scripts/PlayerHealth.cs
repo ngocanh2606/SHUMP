@@ -6,16 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    private int startingLives = 3;
+    public PlayerStats playerStats;
+    public GameManager gameManager;
     //private Text livesText;
     //public GameObject gameOverPanel;
     //public UIController uiController;
 
-    private int currentLives;
+    //private int lives =3;
 
     void Start()
     {
-        currentLives = PlayerPrefs.GetInt("CurrentLives", startingLives); 
+        //currentLives = PlayerPrefs.GetInt("CurrentLives", startingLives); 
         //UpdateLivesUI();
         //gameOverPanel.SetActive(false);
     }
@@ -24,6 +25,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (collision.CompareTag("Enemy"))
         {
+            Debug.Log("lives before:" + playerStats.lives);
             TakeDamage();
             Debug.Log("Collide with enemy");
         }
@@ -31,13 +33,13 @@ public class PlayerHealth : MonoBehaviour
 
     void TakeDamage()
     {
-        currentLives--;
-        Debug.Log("lives:"+ currentLives);
+        playerStats.lives--;
+        Debug.Log("lives after:"+ playerStats.lives);
 
-        PlayerPrefs.SetInt("CurrentLives", currentLives);
+        //PlayerPrefs.SetInt("CurrentLives", currentLives);
         //UpdateLivesUI();
 
-        if (currentLives <= 0)
+        if (playerStats.lives <= 0)
         {
             GameOver();
         }
@@ -56,18 +58,12 @@ public class PlayerHealth : MonoBehaviour
     void GameOver()
     {
         gameObject.SetActive(false); // Disable player object
-        //// Show game over panel if UIController is assigned
-        //if (uiController != null)
-        //{
-        //    uiController.ShowGameOverPanel();
-        //}
-        //else
-        //{
-        //    Debug.LogWarning("UIController reference not set in PlayerHealth script.");
-        //}
+
+        //go to main menu
+        gameManager.EndGame();
     }
 
-    void RestartLevel()
+    private void RestartLevel()
     {
         // Reload the current scene after a short delay
         Invoke("ReloadScene", 0.1f);
@@ -75,13 +71,7 @@ public class PlayerHealth : MonoBehaviour
 
     void ReloadScene()
     {
-        // Reload the current scene
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    private void OnDestroy()
-    {
-        // Ensure PlayerPrefs are cleared if the script is destroyed
-        PlayerPrefs.DeleteKey("CurrentLives");
+        // Reload the current scene from gameManager script
+        gameManager.RestartLevel();
     }
 }
