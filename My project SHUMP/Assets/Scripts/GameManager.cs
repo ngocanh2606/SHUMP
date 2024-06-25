@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
         playerStats.ResetStats();
 
         // Load the main menu or game over scene
-        //SceneManager.LoadScene("MainMenu"); // Change "MainMenu" to your actual main menu scene name
+        SceneManager.LoadScene("MainMenu"); // Change "MainMenu" to your actual main menu scene name
     }
 
     public void RestartLevel()

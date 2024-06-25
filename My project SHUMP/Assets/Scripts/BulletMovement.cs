@@ -51,6 +51,7 @@ public class BulletMovement : MonoBehaviour
 
         if (collider.CompareTag("Enemy"))
         {
+            Debug.Log("Collide with enemy");
             // Mark the bullet as destroyed
             isDestroyed = true;
 
