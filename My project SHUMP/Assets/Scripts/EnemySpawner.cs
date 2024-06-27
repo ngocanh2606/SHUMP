@@ -37,12 +37,4 @@ public class EnemySpawner : MonoBehaviour
         stopSpawning = true;
     }
 
-    // Example of a condition to stop spawning
-    //private void Update()
-    //{
-    //    if (/* Your condition here */)
-    //    {
-    //        StopSpawning();
-    //    }
-    //}
 }

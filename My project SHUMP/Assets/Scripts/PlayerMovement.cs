@@ -47,7 +47,6 @@ public class PlayerMovement : MonoBehaviour
         if (moveX == 0f && moveY == 0f)
         {
             state = MovementState.idle;
-
         }
         else
         {
@@ -61,7 +60,6 @@ public class PlayerMovement : MonoBehaviour
                 sprite.flipX=false;
             }
         }
-
         anim.SetInteger("state", (int)state);
     }
 
