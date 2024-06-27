@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1746982309535941317}
   - component: {fileID: 1746982309535941313}
   - component: {fileID: 1746982309535941312}
+  - component: {fileID: 4014121650951170005}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -158,10 +159,6 @@ MonoBehaviour:
   rightOrUp: 8
   leftOrDown: -8
   diagonalFire: 0.7
-  rb: {fileID: 0}
-  playerX: 0
-  playerY: 0
-  playerBulletTransform: {fileID: 0}
 --- !u!114 &1746982309535941312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,3 +173,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStats: {fileID: 11400000, guid: e09376ad12dea1b43bd2b0405c65d753, type: 2}
   gameManager: {fileID: 409948939432285149, guid: a02f418c883d4ef49b211ca985943594, type: 3}
+--- !u!114 &4014121650951170005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1746982309535941319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9732f34949165194795338d3d80ff394, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

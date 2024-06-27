@@ -49,8 +49,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6b632f4305e1a04bad1144f6ae59b15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
+  speed: 1.5
   deathAnim: {fileID: 7023925604425313360, guid: 65453b6e04006f045a1560bfb42084f1, type: 3}
+  abilityPrefabs:
+  - {fileID: 7222639251697220394, guid: f4bf3f7af879e594f89271f417bc4920, type: 3}
+  - {fileID: 533326531494293948, guid: f24e085ee37ae9341bbd8837902d3bd2, type: 3}
+  - {fileID: 1299616963921176844, guid: bdfc5b7840591f04b9691f964ce37f44, type: 3}
+  dropChance: 0.1
 --- !u!212 &211466838014059612
 SpriteRenderer:
   m_ObjectHideFlags: 0

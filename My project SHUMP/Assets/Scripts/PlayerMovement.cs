@@ -68,6 +68,17 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(moveDirection.x * moveSpeed, moveDirection.y * moveSpeed);
     }
 
+    public void AdjustSpeed(float amount, float duration)
+    {
+        StartCoroutine(IncreaseSpeed(amount, duration));
+    }
 
+    private IEnumerator IncreaseSpeed(float amount, float duration)
+    {
+        moveSpeed += amount;
+        Debug.Log("Move speed= "+moveSpeed);
+        yield return new WaitForSeconds(duration);
+        moveSpeed -= amount;
+    }
     
 }

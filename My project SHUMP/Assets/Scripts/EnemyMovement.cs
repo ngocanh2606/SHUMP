@@ -10,8 +10,8 @@ public class EnemyMovement : MonoBehaviour
 
     private float distance;
 
-    //public Ability[] possibleAbilities;
-    //public float dropChance = 0.5f; // 50% chance to drop an ability
+    public GameObject[] abilityPrefabs;
+    public float dropChance = 0.2f; // 20% chance to drop an ability
 
     void Start()
     {
@@ -51,26 +51,17 @@ public class EnemyMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Ammo"))
         {
             Instantiate(deathAnim, transform.position, Quaternion.identity);
-            //DropAbility();
+            DropAbility();
             Destroy(gameObject);
         }
     }
 
-    //void DropAbility()
-    //{
-    //    if (Random.value < dropChance && possibleAbilities.Length > 0)
-    //    {
-    //        Ability droppedAbility = possibleAbilities[Random.Range(0, possibleAbilities.Length)];
-    //        // Assuming the player is tagged "Player"
-    //        GameObject player = GameObject.FindGameObjectWithTag("Player");
-    //        if (player != null)
-    //        {
-    //            PlayerController playerController = player.GetComponent<PlayerController>();
-    //            if (playerController != null)
-    //            {
-    //                playerController.AddAbility(droppedAbility);
-    //            }
-    //        }
-    //    }
-    //}
+    void DropAbility()
+    {
+        if (Random.value < dropChance && abilityPrefabs.Length > 0)
+        {
+            int randomIndex = Random.Range(0, abilityPrefabs.Length);
+            Instantiate(abilityPrefabs[randomIndex], transform.position, Quaternion.identity);
+        }
+    }
 }

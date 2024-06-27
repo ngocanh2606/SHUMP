@@ -10,7 +10,7 @@ public class CountdownTimer : MonoBehaviour
 
     public Image countdownBar;
 
-    public GameObject winUI; // Reference to the Win UI GameObject
+    public GameObject winText; 
     public float timeToNextLevel = 5f; // Time to wait before loading the next level
     public GameManager gameManager;
 
@@ -18,7 +18,7 @@ public class CountdownTimer : MonoBehaviour
     {
         timeRemaining = totalTime;
         UpdateUI();
-        winUI.SetActive(false); // Ensure Win UI is initially hidden
+        winText.SetActive(false); // Ensure Win UI is initially hidden
     }
 
     void Update()
@@ -65,7 +65,7 @@ public class CountdownTimer : MonoBehaviour
 
     void ShowWinUI()
     {
-        winUI.SetActive(true);
+        winText.SetActive(true);
         Invoke("LoadNextLevel", timeToNextLevel); // Load next level after a delay
     }
 

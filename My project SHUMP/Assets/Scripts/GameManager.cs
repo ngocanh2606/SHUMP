@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public PlayerStats playerStats;
+    private int currentLevel = 0;
 
     public void EndGame()
     {
@@ -22,6 +23,15 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        currentLevel++;
+        if (currentLevel > 2)
+        {
+            EndGame();
+            currentLevel = 0;
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
     }
 }

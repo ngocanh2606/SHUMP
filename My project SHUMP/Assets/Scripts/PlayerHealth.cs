@@ -1,24 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
     public PlayerStats playerStats;
     public GameManager gameManager;
-    //private Text livesText;
-    //public GameObject gameOverPanel;
-    //public UIController uiController;
-
-    //private int lives =3;
+    public TextMeshProUGUI lifeText;
 
     void Start()
     {
-        
-        //UpdateLivesUI();
-        //gameOverPanel.SetActive(false);
+        UpdateLifeText();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -34,9 +28,6 @@ public class PlayerHealth : MonoBehaviour
     void TakeDamage()
     {
         playerStats.lives--;
-        Debug.Log("lives after:"+ playerStats.lives);
-
-        //UpdateLivesUI();
 
         if (playerStats.lives <= 0)
         {
@@ -47,12 +38,20 @@ public class PlayerHealth : MonoBehaviour
             // Restart level immediately
             RestartLevel();
         }
+
+        UpdateLifeText();
     }
 
-    //void UpdateLivesUI()
-    //{
-    //    livesText.text = "Lives: " + currentLives;
-    //}
+    public void AddLife()
+    {
+        playerStats.lives++;
+        UpdateLifeText();
+    }
+
+    void UpdateLifeText()
+    {
+        lifeText.text = "Lives: " + playerStats.lives;
+    }
 
     void GameOver()
     {

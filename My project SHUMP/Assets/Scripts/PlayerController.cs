@@ -1,50 +1,91 @@
-//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+using System.Collections.Generic;
 
-//public class PlayerController : MonoBehaviour
-//{
-//    private Stack<Ability> abilities = new Stack<Ability>();
+public class PlayerController : MonoBehaviour
+{
+    public enum AbilityType
+    {
+        IncreaseSpeed,
+        DeleteEnemies,
+        AddLife
+    }
 
-//    // Start is called before the first frame update
-//    void Start()
-//    {
-        
-//    }
+    [System.Serializable]
+    public class Ability
+    {
+        public AbilityType type;
+        public Sprite sprite;
+    }
 
-//    // Update is called once per frame
-//    void Update()
-//    {
-//        if (Input.GetKeyDown(KeyCode.Space) && abilities.Count > 0)
-//        {
-//            Ability ability = abilities.Pop();
-//            ability.UseAbility(this);
-//        }
-//    }
+    public Image abilityUIImage;
+    public List<Ability> abilityDefinitions = new List<Ability>();
 
-//    public void AddAbility(Ability ability)
-//    {
-//        abilities.Push(ability);
-//    }
+    private PlayerMovement playerMovement;
+    private PlayerHealth playerHealth;
+    private Stack<Ability> abilities = new Stack<Ability>();
 
-//    public IEnumerator IncreaseSpeed(float amount, float duration)
-//    {
-//        moveSpeed += amount;
-//        yield return new WaitForSeconds(duration);
-//        moveSpeed -= amount;
-//    }
+    void Start()
+    {
+        playerMovement = GetComponent<PlayerMovement>();
+        playerHealth = GetComponent<PlayerHealth>();
+    }
 
-//    public IEnumerator StopSpawningEnemies(float duration)
-//    {
-//        EnemySpawner[] spawners = FindObjectsOfType<EnemySpawner>();
-//        foreach (var spawner in spawners)
-//        {
-//            spawner.CanSpawn = false;
-//        }
-//        yield return new WaitForSeconds(duration);
-//        foreach (var spawner in spawners)
-//        {
-//            spawner.CanSpawn = true;
-//        }
-//    }
-//}
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && abilities.Count > 0)
+        {
+            Ability ability = abilities.Pop();
+            UseAbility(ability.type);
+            UpdateAbilityUI();
+        }
+    }
+
+    public void AddAbility(AbilityType abilityType)
+    {
+        Ability newAbility = abilityDefinitions.Find(a => a.type == abilityType);
+        if (newAbility != null)
+        {
+            abilities.Push(newAbility);
+            UpdateAbilityUI();
+        }
+    }
+
+    void UseAbility(AbilityType abilityType)
+    {
+        switch (abilityType)
+        {
+            case AbilityType.IncreaseSpeed:
+                playerMovement.AdjustSpeed(0.5f, 7f); // Example values
+                break;
+            case AbilityType.DeleteEnemies:
+                DeleteAllEnemies();
+                break;
+            case AbilityType.AddLife:
+                playerHealth.AddLife();
+                break;
+        }
+    }
+
+    void UpdateAbilityUI()
+    {
+        if (abilities.Count > 0)
+        {
+            Ability topAbility = abilities.Peek();
+            abilityUIImage.sprite = topAbility.sprite;
+        }
+        else
+        {
+            abilityUIImage.sprite = null; // Clear the sprite if no abilities are left
+        }
+    }
+
+    void DeleteAllEnemies()
+    {
+        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            Destroy(enemy);
+        }
+    }
+}
